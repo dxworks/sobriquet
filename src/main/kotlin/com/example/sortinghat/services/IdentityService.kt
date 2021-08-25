@@ -17,7 +17,7 @@ class IdentityService(@Autowired val identityRepository: IdentityRepository){
 
     @Transactional
     fun delete(id: String) =
-            identityRepository.findById(id)
+            identityRepository.findByUuid(id)
                     ?.let { identityRepository.delete(it) }
                     ?: throw NoSuchElementException(id)
 }

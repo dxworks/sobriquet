@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class IdentityController(@Autowired val identityService: IdentityService) {
 
-    @PostMapping("/identity")
+    @PostMapping("/addIdentity")
     fun addIdentity(@RequestBody identity: IdentityDTO): IdentityDTO = identityService.addIdentity(identity)
 
-    @GetMapping("/getAllIdentities")
+    @GetMapping("/identities")
     fun getAllIdentities() = identityService.getAllIdentities()
 
     @GetMapping("/identity/{firstName}/{lastName}")
