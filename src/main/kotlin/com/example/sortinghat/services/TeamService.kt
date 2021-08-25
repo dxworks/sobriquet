@@ -16,7 +16,7 @@ class TeamService(@Autowired val teamRepository: TeamRepository) {
 
     @Transactional
     fun delete(id: String) =
-            teamRepository.findById(id)
+            teamRepository.findByUuid(id)
                     ?.let { teamRepository.delete(it.get()) }
                     ?: throw NoSuchElementException(id)
 }

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class TeamController(@Autowired val teamService: TeamService) {
-    @PostMapping("/team")
+    @PostMapping("/addTeam")
     fun addTeam(@RequestBody team: TeamDTO): TeamDTO = teamService.addTeam(team)
 
-    @GetMapping("/getAllTeams")
+    @GetMapping("/teams")
     fun getAllTeams() = teamService.getAllTeams()
 
     @DeleteMapping("/deleteTeam/{id}")

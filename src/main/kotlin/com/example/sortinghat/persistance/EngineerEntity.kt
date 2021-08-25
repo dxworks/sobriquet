@@ -21,7 +21,7 @@ class EngineerEntity (
     var position: String,
     @Column
     @ElementCollection
-    var teams: List<String>,
+    var teams: MutableList<String>,
     @Column
     var phone: String,
     @Column
@@ -29,7 +29,7 @@ class EngineerEntity (
     @Column
     var country: String
 ) : BaseEntity() {
-    constructor() : this("", "", "", emptyList(), "", "", "")
+    constructor() : this("", "", "", mutableListOf(""),"", "", "")
 
     fun toDTO() = EngineerDTO(
             id = uuid,

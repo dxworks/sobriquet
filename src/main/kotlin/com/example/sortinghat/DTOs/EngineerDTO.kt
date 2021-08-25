@@ -5,7 +5,7 @@ data class EngineerDTO(
         var firstName: String,
         var lastName: String,
         var position: String,
-        var teams: List<String>,
+        var teams: MutableList<String>,
         var phone: String,
         var city: String,
         var country: String
