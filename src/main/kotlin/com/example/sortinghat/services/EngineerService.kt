@@ -20,9 +20,8 @@ class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
         engineerRepository.save(engineer).toDTO()
     }
 
+    fun removeTeam(id: String) = engineerRepository.findAll().forEach { it.toDTO().teams.remove(id) }
+
     @Transactional
-    fun delete(id: String) =
-            engineerRepository.findByUuid(id)
-                    ?.let { engineerRepository.delete(it.get()) }
-                    ?: throw NoSuchElementException(id)
+    fun delete(id: String) = engineerRepository.findByUuid(id).let { engineerRepository.delete(it.get()) }
 }

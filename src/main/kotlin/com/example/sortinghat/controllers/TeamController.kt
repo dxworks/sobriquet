@@ -16,7 +16,7 @@ class TeamController(@Autowired val teamService: TeamService) {
     fun getAllTeams() = teamService.getAllTeams()
 
     @DeleteMapping("/deleteTeam/{id}")
-    fun deleteIdentity(@PathVariable id: String): ResponseEntity<Any> {
+    fun deleteTeam(@PathVariable id: String): ResponseEntity<Any> {
         return try {
             teamService.delete(id)
             ResponseEntity(HttpStatus.NO_CONTENT)
