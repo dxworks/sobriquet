@@ -2,32 +2,31 @@ package com.example.sortinghat.configuration
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
+
 @Configuration
 class SecurityConfiguration : WebSecurityConfigurerAdapter() {
-    override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN")
-                .and()
-                .withUser("user").password(passwordEncoder().encode("userPass")).roles("USER")
+
+    @Bean
+    @Throws(Exception::class)
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
     }
 
     override fun configure(http: HttpSecurity) {
-        http.httpBasic()
-
-        http.csrf().disable()
-
         http.cors()
-
-        http.authorizeRequests()
-                .antMatchers("/unsecure/**").permitAll()
+        http.csrf().disable().authorizeRequests()
+                .antMatchers( "/api/**", "/teams", "/engineers", "/identities", "/addEngineer", "/addTeam/{engineerId}/{teamId}", "/deleteEngineer/{id}", "/addIdentity", "/identity/{firstName}/{lastName}", "/deleteIdentity/{id}", "/deleteTeam/{id}", "/addTeam").permitAll()
                 .anyRequest().authenticated()
+                .and().exceptionHandling().and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
     @Bean
@@ -39,7 +38,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
                         .allowedMethods("*")
-                        .allowedOrigins("http://localhost:4200");
+                        .allowedOrigins("http://localhost:4200")
             }
         }
     }
