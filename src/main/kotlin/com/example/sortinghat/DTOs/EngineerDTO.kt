@@ -8,5 +8,7 @@ data class EngineerDTO(
         var teams: MutableList<String>,
         var phone: String,
         var city: String,
-        var country: String
+        var country: String,
+        var email: String?,
+        var affiliations: MutableList<AffiliationDTO>
 )
