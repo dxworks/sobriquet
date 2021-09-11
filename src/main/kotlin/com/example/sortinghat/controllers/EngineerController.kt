@@ -16,6 +16,9 @@ class EngineerController(@Autowired val engineerService: EngineerService) {
     @PutMapping("/addTeam/{engineerId}/{teamId}")
     fun assignTeam(@PathVariable engineerId: String, @PathVariable teamId: String) = engineerService.assignEngineerToTeam(engineerId, teamId)
 
+    @PutMapping("/linkAffiliation/{engineerId}/{affiliationId}")
+    fun linkAffiliation(@PathVariable engineerId: String, @PathVariable affiliationId: String) = engineerService.linkAffiliation(engineerId, affiliationId)
+
     @DeleteMapping("deleteEngineer/{id}")
     fun deleteEngineer(@PathVariable id: String) = engineerService.delete(id)
 
