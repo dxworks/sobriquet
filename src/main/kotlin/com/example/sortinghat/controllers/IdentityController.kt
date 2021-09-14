@@ -28,4 +28,7 @@ class IdentityController(@Autowired val identityService: IdentityService) {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
+
+    @PutMapping("/editIdentity")
+    fun editIdentity(@RequestBody identity: IdentityDTO) = identityService.edit(identity)
 }
