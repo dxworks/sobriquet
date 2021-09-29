@@ -25,9 +25,12 @@ class IdentityEntity(
         var firstName: String,
 
         @Column
-        var lastName: String
+        var lastName: String,
+
+        @Column
+        var source: String?
 ) : BaseEntity() {
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "", "", "", "", "")
 
     fun toDTO() = IdentityDTO(
             id = uuid,
@@ -36,6 +39,7 @@ class IdentityEntity(
             avatar = avatar,
             firstName = firstName,
             lastName = lastName,
+            source = source
     )
 }
 

@@ -9,7 +9,7 @@ import javax.transaction.Transactional
 
 @Service
 class IdentityService(@Autowired val identityRepository: IdentityRepository){
-    fun addIdentity(identity: IdentityDTO) = identityRepository.save(IdentityEntity(identity.username, identity.email, identity.avatar, identity.firstName, identity.lastName)).toDTO()
+    fun addIdentity(identity: IdentityDTO) = identityRepository.save(IdentityEntity(identity.username, identity.email, identity.avatar, identity.firstName, identity.lastName, identity.source)).toDTO()
 
     fun getAllIdentities() = identityRepository.findAll().map { it.toDTO() }
 
