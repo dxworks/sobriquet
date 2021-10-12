@@ -10,5 +10,6 @@ data class EngineerDTO(
         var city: String,
         var country: String,
         var email: String?,
-        var affiliations: MutableList<AffiliationDTO>
+        var affiliations: MutableList<AffiliationDTO>,
+        var projects: MutableList<String>
 )

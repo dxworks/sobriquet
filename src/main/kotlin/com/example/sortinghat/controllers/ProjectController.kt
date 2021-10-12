@@ -12,4 +12,7 @@ class ProjectController(@Autowired val projectService: ProjectService) {
 
     @PostMapping("/addProject/{name}")
     fun addProject(@PathVariable name: String, @RequestBody identities: MutableList<IdentityDTO>) = projectService.add(name, identities)
+
+    @DeleteMapping("deleteProject/{name}")
+    fun deleteEngineer(@PathVariable name: String) = projectService.delete(name)
 }

@@ -31,9 +31,12 @@ class EngineerEntity(
         var email: String?,
         @Column
     @ElementCollection
-        var affiliations: MutableList<AffiliationDTO>
+        var affiliations: MutableList<AffiliationDTO>,
+        @Column
+        @ElementCollection
+        var projects: MutableList<String>
 ) : BaseEntity() {
-    constructor() : this("", "", "", mutableListOf(""),"", "", "", "", mutableListOf())
+    constructor() : this("", "", "", mutableListOf(""),"", "", "", "", mutableListOf(), mutableListOf())
 
     fun toDTO() = EngineerDTO(
             id = uuid,
@@ -45,6 +48,7 @@ class EngineerEntity(
             city = city,
             country = country,
             email = email,
-            affiliations = affiliations
+            affiliations = affiliations,
+            projects = projects
     )
 }
