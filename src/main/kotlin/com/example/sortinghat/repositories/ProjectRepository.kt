@@ -7,6 +7,4 @@ import java.util.*
 
 interface  ProjectRepository : CrudRepository<ProjectEntity, Long>{
     fun findByUuid(id: String): Optional<ProjectEntity>
-
-    fun findByName(name: String): Optional<ProjectEntity>
 }

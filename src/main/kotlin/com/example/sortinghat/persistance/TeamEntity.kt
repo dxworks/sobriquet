@@ -16,9 +16,9 @@ class TeamEntity (
         var name: String,
 
         @Column
-        var description: String,
+        var description: String
 ) : BaseEntity() {
-    constructor() : this("", "",)
+    constructor() : this("", "")
 
     fun toDTO() = TeamDTO(
             id = uuid,

@@ -1,9 +1,7 @@
 package com.example.sortinghat.services
 
 import com.example.sortinghat.DTOs.TeamDTO
-import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.persistance.TeamEntity
-import com.example.sortinghat.repositories.EngineerRepository
 import com.example.sortinghat.repositories.TeamRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,10 +16,8 @@ class TeamService(@Autowired val teamRepository: TeamRepository, @Autowired val 
 
     @Transactional
     fun delete(id: String) =
-            teamRepository.findByUuid(id)
-                    ?.let {
-                        teamRepository.delete(it.get())
-                        engineerService.removeTeam(id)
-                    }
-                    ?: throw NoSuchElementException(id)
+            teamRepository.findByUuid(id).let {
+                teamRepository.delete(it.get())
+                engineerService.removeTeam(id)
+            }
 }

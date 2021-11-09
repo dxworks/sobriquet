@@ -2,7 +2,6 @@ package com.example.sortinghat.controllers
 
 import com.example.sortinghat.DTOs.EngineerDTO
 import com.example.sortinghat.services.EngineerService
-import org.apache.catalina.Engine
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 

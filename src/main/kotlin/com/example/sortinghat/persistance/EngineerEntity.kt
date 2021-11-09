@@ -2,6 +2,7 @@ package com.example.sortinghat.persistance
 
 import com.example.sortinghat.DTOs.AffiliationDTO
 import com.example.sortinghat.DTOs.EngineerDTO
+import com.example.sortinghat.DTOs.TagDTO
 import lombok.AllArgsConstructor
 import lombok.Data
 import lombok.NoArgsConstructor
@@ -19,10 +20,8 @@ class EngineerEntity(
         @Column
         var position: String,
         @Column
-    @ElementCollection
+        @ElementCollection
         var teams: MutableList<String>,
-        @Column
-        var phone: String,
         @Column
         var city: String,
         @Column
@@ -30,13 +29,17 @@ class EngineerEntity(
         @Column
         var email: String?,
         @Column
-    @ElementCollection
+        @ElementCollection
         var affiliations: MutableList<AffiliationDTO>,
         @Column
+        var project: String?,
+        @Column
         @ElementCollection
-        var projects: MutableList<String>
+        var tags: MutableList<TagDTO>,
+        @Column
+        var role: String
 ) : BaseEntity() {
-    constructor() : this("", "", "", mutableListOf(""),"", "", "", "", mutableListOf(), mutableListOf())
+    constructor() : this("", "", "", mutableListOf(), "", "", "", mutableListOf(), "", mutableListOf(), "")
 
     fun toDTO() = EngineerDTO(
             id = uuid,
@@ -44,11 +47,12 @@ class EngineerEntity(
             lastName = lastName,
             position = position,
             teams = teams,
-            phone = phone,
             city = city,
             country = country,
             email = email,
             affiliations = affiliations,
-            projects = projects
+            project = project,
+            tags = tags,
+            role = role
     )
 }

@@ -16,7 +16,7 @@ class IdentityService(@Autowired val identityRepository: IdentityRepository){
     fun getAllIdentitiesForFullName(firstName: String, lastName: String) = identityRepository.findByFirstNameAndLastName(firstName, lastName).map { it.toDTO() }
 
     fun edit(identity: IdentityDTO) {
-       var identityVar = identityRepository.findByUuid(identity.id).get()
+       val identityVar = identityRepository.findByUuid(identity.id).get()
         identityVar.avatar = identity.avatar
         identityVar.email = identity.email
         identityVar.firstName = identity.firstName
@@ -26,8 +26,5 @@ class IdentityService(@Autowired val identityRepository: IdentityRepository){
     }
 
     @Transactional
-    fun delete(id: String) =
-            identityRepository.findByUuid(id).get()
-                    ?.let { identityRepository.delete(it) }
-                    ?: throw NoSuchElementException(id)
+    fun delete(id: String) = identityRepository.findByUuid(id).get().let { identityRepository.delete(it) }
 }
