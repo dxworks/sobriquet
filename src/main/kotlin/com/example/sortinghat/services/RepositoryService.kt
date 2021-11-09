@@ -15,7 +15,5 @@ class RepositoryService(@Autowired val repository: RepositoryRepository) {
     fun addRepo(repo: RepositoryDTO) = repository.save(RepositoryEntity(repo.name, repo.owner)).toDTO()
 
     @Transactional
-    fun delete(id: String) =
-            repository.findByUuid(id)
-                    ?.let { repository.delete(it.get()) }
+    fun delete(id: String) = repository.findByUuid(id).let { repository.delete(it.get()) }
 }

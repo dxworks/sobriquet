@@ -25,6 +25,7 @@ class ProjectEntity(
     constructor() : this("", mutableListOf())
 
     fun toDTO() = ProjectDTO(
+            id = uuid,
             name = name,
             identities = identities
     )

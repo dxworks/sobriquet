@@ -1,6 +1,6 @@
 package com.example.sortinghat.persistance
 
-import com.example.sortinghat.DTOs.RepositoryDTO
+import com.example.sortinghat.DTOs.RoleDTO
 import lombok.AllArgsConstructor
 import lombok.Data
 import lombok.NoArgsConstructor
@@ -11,18 +11,14 @@ import javax.persistence.Entity
 @AllArgsConstructor
 @Entity
 @Data
-class RepositoryEntity (
+class RoleEntity(
         @Column
         var name: String,
-
-        @Column
-        var owner: String,
 ) : BaseEntity() {
-    constructor() : this("", "")
+    constructor() : this("")
 
-    fun toDTO() = RepositoryDTO(
-            id = uuid,
-            name = name,
-            owner = owner
+    fun toDTO() = RoleDTO(
+            name = name
     )
 }
+
