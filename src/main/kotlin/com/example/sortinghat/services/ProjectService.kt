@@ -25,7 +25,9 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     @Transactional
     fun delete(id: String) {
-        engineerRepository.findByProject(id).let { engineerRepository.delete(it.get()) }
+        if (engineerRepository.findAllByProject(id).isPresent) {
+            engineerRepository.findAllByProject(id).let { engineerRepository.deleteAll(it.get()) }
+        }
         projectRepository.findByUuid(id).let { projectRepository.delete(it.get()) }
     }
 }
