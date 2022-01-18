@@ -12,5 +12,6 @@ data class EngineerDTO(
         var affiliations: MutableList<AffiliationDTO>,
         var project: String?,
         var tags: MutableList<TagDTO>,
+        var identities: MutableList<IdentityDTO>,
         var role: String
 )
