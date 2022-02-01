@@ -16,9 +16,6 @@ class EngineerController(@Autowired val engineerService: EngineerService) {
     @PutMapping("/addTeam/{engineerId}/{teamId}")
     fun assignTeam(@PathVariable engineerId: String, @PathVariable teamId: String) = engineerService.assignEngineerToTeam(engineerId, teamId)
 
-    @PutMapping("/linkAffiliation/{engineerId}/{affiliationId}")
-    fun linkAffiliation(@PathVariable engineerId: String, @PathVariable affiliationId: String) = engineerService.linkAffiliation(engineerId, affiliationId)
-
     @PutMapping("/editEngineer/{engineerId}")
     fun editEngineer(@PathVariable engineerId: String, @RequestBody engineer: EngineerDTO) = engineerService.edit(engineerId, engineer)
 
