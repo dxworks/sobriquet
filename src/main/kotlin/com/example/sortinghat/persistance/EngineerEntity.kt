@@ -15,11 +15,9 @@ import javax.persistence.*
 @Data
 class EngineerEntity(
         @Column
-        var firstName: String,
+        var name: String,
         @Column
-        var lastName: String,
-        @Column
-        var position: String,
+        var senority: String,
         @Column
         @ElementCollection
         var teams: MutableList<String>,
@@ -30,9 +28,6 @@ class EngineerEntity(
         @Column
         var email: String?,
         @Column
-        @ElementCollection
-        var affiliations: MutableList<AffiliationDTO>,
-        @Column
         var project: String?,
         @Column
         @ElementCollection
@@ -41,23 +36,29 @@ class EngineerEntity(
         var role: String,
         @Column
         @ElementCollection
-        var identities: MutableList<IdentityDTO>
+        var identities: MutableList<IdentityDTO>,
+        @Column
+        var reportsTo: String,
+        @Column
+        var status: String
+
 ) : BaseEntity() {
-    constructor() : this("", "", "", mutableListOf(), "", "", "", mutableListOf(), "", mutableListOf(), "", mutableListOf())
+    constructor() : this("", "", mutableListOf(), "", "", "", "",
+            mutableListOf(), "", mutableListOf(), "", "")
 
     fun toDTO() = EngineerDTO(
             id = uuid,
-            firstName = firstName,
-            lastName = lastName,
-            position = position,
+            name = name,
+            senority = senority,
             teams = teams,
             city = city,
             country = country,
             email = email,
-            affiliations = affiliations,
             project = project,
             tags = tags,
             role = role,
-            identities = identities
+            identities = identities,
+            reportsTo = reportsTo,
+            status = status
     )
 }
