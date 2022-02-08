@@ -1,6 +1,5 @@
 package com.example.sortinghat.persistance
 
-import com.example.sortinghat.DTOs.AffiliationDTO
 import com.example.sortinghat.DTOs.EngineerDTO
 import com.example.sortinghat.DTOs.IdentityDTO
 import com.example.sortinghat.DTOs.TagDTO
@@ -26,9 +25,9 @@ class EngineerEntity(
         @Column
         var country: String,
         @Column
-        var email: String?,
+        var email: String,
         @Column
-        var project: String?,
+        var project: String,
         @Column
         @ElementCollection
         var tags: MutableList<TagDTO>,
@@ -40,11 +39,16 @@ class EngineerEntity(
         @Column
         var reportsTo: String,
         @Column
-        var status: String
+        var status: String,
+        @Column
+        var username: String,
+        @Column
+        var ignorable: Boolean
+
 
 ) : BaseEntity() {
     constructor() : this("", "", mutableListOf(), "", "", "", "",
-            mutableListOf(), "", mutableListOf(), "", "")
+            mutableListOf(), "", mutableListOf(), "", "", "", false)
 
     fun toDTO() = EngineerDTO(
             id = uuid,
@@ -59,6 +63,8 @@ class EngineerEntity(
             role = role,
             identities = identities,
             reportsTo = reportsTo,
-            status = status
+            status = status,
+            username = username,
+            ignorable = ignorable
     )
 }
