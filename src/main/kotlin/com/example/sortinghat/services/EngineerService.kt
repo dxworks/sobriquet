@@ -12,7 +12,7 @@ class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
 
     fun getAllEngineers() = engineerRepository.findAll().map { it.toDTO() }
 
-    fun addEngineer(engineer: EngineerDTO) = engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status)).toDTO()
+    fun addEngineer(engineer: EngineerDTO) = engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()
 
     fun assignEngineerToTeam(engineerId: String, teamId: String) {
         val engineer = engineerRepository.findByUuid(engineerId).get()
@@ -35,6 +35,8 @@ class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
         repoEngineer.status = engineer.status
         repoEngineer.name = engineer.name
         repoEngineer.teams = engineer.teams
+        repoEngineer.username = engineer.username
+        repoEngineer.ignorable = engineer.ignorable
         engineerRepository.save(repoEngineer).toDTO()
     }
 
