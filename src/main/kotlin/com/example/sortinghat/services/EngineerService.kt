@@ -14,6 +14,8 @@ class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
 
     fun addEngineer(engineer: EngineerDTO) = engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()
 
+    fun addEngineers(engineers: List<EngineerDTO>) = engineers.forEach{engineer -> engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()}
+
     fun assignEngineerToTeam(engineerId: String, teamId: String) {
         val engineer = engineerRepository.findByUuid(engineerId).get()
         engineer.toDTO().teams.add(teamId)

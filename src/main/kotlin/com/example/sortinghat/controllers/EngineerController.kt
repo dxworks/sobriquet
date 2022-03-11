@@ -13,6 +13,9 @@ class EngineerController(@Autowired val engineerService: EngineerService) {
     @PostMapping("/addEngineer")
     fun addEngineer(@RequestBody engineer: EngineerDTO) = engineerService.addEngineer(engineer)
 
+    @PostMapping("/addEngineers")
+    fun addEngineers(@RequestBody engineers: List<EngineerDTO>) = engineerService.addEngineers(engineers)
+
     @PutMapping("/addTeam/{engineerId}/{teamId}")
     fun assignTeam(@PathVariable engineerId: String, @PathVariable teamId: String) = engineerService.assignEngineerToTeam(engineerId, teamId)
 
