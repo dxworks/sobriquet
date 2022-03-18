@@ -6,7 +6,7 @@ import java.util.*
 
 
 interface IdentityRepository : CrudRepository<IdentityEntity, Long> {
-   fun findByUuid(id: String?): Optional<IdentityEntity>
+    fun findByUuid(id: String?): Optional<IdentityEntity>
 
-   fun findByFirstNameAndLastName(firstname: String, lastname: String): List<IdentityEntity>
+    fun findByFirstNameAndLastName(firstname: String, lastname: String): List<IdentityEntity>
 }

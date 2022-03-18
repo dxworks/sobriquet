@@ -5,9 +5,7 @@ import com.example.sortinghat.DTOs.ProjectDTO
 import lombok.AllArgsConstructor
 import lombok.Data
 import lombok.NoArgsConstructor
-import javax.persistence.Column
-import javax.persistence.ElementCollection
-import javax.persistence.Entity
+import javax.persistence.*
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,14 +17,19 @@ class ProjectEntity(
 
         @Column
         @ElementCollection
-        var identities: MutableList<IdentityDTO>
+        var identities: MutableList<IdentityDTO>,
+        @Column
+        @OneToMany(cascade = [CascadeType.ALL])
+        @JoinTable(name = "engineers")
+        var engineers: MutableList<EngineerEntity>
 
 ) : BaseEntity() {
-    constructor() : this("", mutableListOf())
+    constructor() : this("", mutableListOf(), mutableListOf())
 
     fun toDTO() = ProjectDTO(
             id = uuid,
             name = name,
-            identities = identities
+            identities = identities,
+            engineers = engineers.map { it.toDTO() }.toMutableList()
     )
 }

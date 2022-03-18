@@ -1,6 +1,7 @@
 package com.example.sortinghat.services
 
-import com.example.sortinghat.DTOs.IdentityDTO
+import com.example.sortinghat.DTOs.ProjectDTO
+import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.persistance.ProjectEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import com.example.sortinghat.repositories.ProjectRepository
@@ -15,11 +16,15 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     fun getById(id: String) = projectRepository.findByUuid(id).get().toDTO()
 
-    fun add(name: String, identities: MutableList<IdentityDTO>) = projectRepository.save(ProjectEntity(name, identities))
+    fun add(project: ProjectDTO) {
+        val engineersEntity = project.engineers.map { EngineerEntity(it.name!!, it.senority, it.teams, it.city, it.country, it.email!!, it.project, it.tags, it.role, it.identities, it.reportsTo, it.status, it.username!!, it.ignorable) }.toMutableList()
+        projectRepository.save(ProjectEntity(project.name, project.identities, engineersEntity))
+    }
 
-    fun edit(id: String, identities: MutableList<IdentityDTO>) {
+    fun edit(id: String, newProject: ProjectDTO) {
         val project = projectRepository.findByUuid(id).get()
-        project.identities = identities
+        project.identities = newProject.identities
+        project.engineers = newProject.engineers.map { EngineerEntity(it.name!!, it.senority, it.teams, it.city, it.country, it.email!!, it.project, it.tags, it.role, it.identities, it.reportsTo, it.status, it.username!!, it.ignorable) }.toMutableList()
         projectRepository.save(project).toDTO()
     }
 
@@ -30,4 +35,5 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
         }
         projectRepository.findByUuid(id).let { projectRepository.delete(it.get()) }
     }
+
 }
