@@ -14,7 +14,7 @@ import javax.persistence.*
 @Data
 class EngineerEntity(
         @Column
-        var name: String,
+        var name: String?,
         @Column
         var senority: String,
         @Column
@@ -25,7 +25,7 @@ class EngineerEntity(
         @Column
         var country: String,
         @Column
-        var email: String,
+        var email: String?,
         @Column
         var project: String,
         @Column
@@ -41,7 +41,7 @@ class EngineerEntity(
         @Column
         var status: String,
         @Column
-        var username: String,
+        var username: String?,
         @Column
         var ignorable: Boolean
 

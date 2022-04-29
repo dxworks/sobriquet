@@ -13,7 +13,7 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     fun getAll() = projectRepository.findAll().map { it.toDTO() }
 
-    fun getById(id: String) = projectRepository.findByUuid(id).get().toDTO()
+    fun getByName(name: String) = projectRepository.findByName(name).get().toDTO()
 
     fun add(name: String, identities: MutableList<IdentityDTO>) = projectRepository.save(ProjectEntity(name, identities))
 

@@ -11,7 +11,7 @@ class ProjectController(@Autowired val projectService: ProjectService) {
     fun getAll() = projectService.getAll()
 
     @GetMapping("/project/{name}")
-    fun getByName(@PathVariable name: String) = projectService.getById(name)
+    fun getByName(@PathVariable name: String) = projectService.getByName(name)
 
     @PostMapping("/addProject/{name}")
     fun addProject(@PathVariable name: String, @RequestBody identities: MutableList<IdentityDTO>) = projectService.add(name, identities)

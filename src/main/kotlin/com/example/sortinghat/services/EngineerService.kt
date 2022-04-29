@@ -1,6 +1,7 @@
 package com.example.sortinghat.services
 
 import com.example.sortinghat.DTOs.EngineerDTO
+import com.example.sortinghat.models.EngineerPersistence
 import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -8,13 +9,15 @@ import org.springframework.stereotype.Service
 import javax.transaction.Transactional
 
 @Service
-class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
+class EngineerService(@Autowired val engineerRepository: EngineerRepository, @Autowired val projectService: ProjectService) {
 
     fun getAllEngineers() = engineerRepository.findAll().map { it.toDTO() }
 
     fun addEngineer(engineer: EngineerDTO) = engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()
 
-    fun addEngineers(engineers: List<EngineerDTO>) = engineers.forEach{engineer -> engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()}
+    fun addEngineers(engineers: MutableList<EngineerDTO>) = engineers.forEach { engineer -> engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO() }
+
+    fun getEngineersByPage(pageIndex: Int, pageSize: Int, projectID: String) = engineerRepository.findAllByProject(projectID).get().subList(pageIndex * pageSize, pageSize * (pageIndex + 1) - 1)
 
     fun assignEngineerToTeam(engineerId: String, teamId: String) {
         val engineer = engineerRepository.findByUuid(engineerId).get()
