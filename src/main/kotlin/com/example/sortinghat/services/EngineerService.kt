@@ -1,7 +1,6 @@
 package com.example.sortinghat.services
 
 import com.example.sortinghat.DTOs.EngineerDTO
-import com.example.sortinghat.models.EngineerPersistence
 import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import org.springframework.beans.factory.annotation.Autowired
