@@ -2,10 +2,7 @@ package com.example.sortinghat.repositories
 
 
 import com.example.sortinghat.persistance.RoleEntity
-import org.springframework.data.repository.CrudRepository
-import java.util.*
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface RoleRepository: CrudRepository<RoleEntity, Long> {
-    fun findByName(name: String): Optional<RoleEntity>
-}
+interface RoleRepository: JpaRepository<RoleEntity, Long>
 

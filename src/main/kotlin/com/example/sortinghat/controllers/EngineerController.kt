@@ -10,8 +10,8 @@ class EngineerController(@Autowired val engineerService: EngineerService) {
     @GetMapping("/engineers")
     fun getAllEngineers() = engineerService.getAllEngineers()
 
-    @GetMapping("/engineers/{pageIndex}/{pageSize}/{projectID}")
-    fun getEngineersByPage(@PathVariable pageIndex: Int, @PathVariable pageSize: Int, @PathVariable projectID: String) = engineerService.getEngineersByPage(pageIndex, pageSize, projectID)
+    @GetMapping("/engineers/{projectID}")
+    fun getEngineersByProject(@PathVariable projectID: String) = engineerService.getAllEngineersByProject(projectID)
 
     @PostMapping("/addEngineer")
     fun addEngineer(@RequestBody engineer: EngineerDTO) = engineerService.addEngineer(engineer)

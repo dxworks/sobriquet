@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service
 import javax.transaction.Transactional
 
 @Service
-class EngineerService(@Autowired val engineerRepository: EngineerRepository, @Autowired val projectService: ProjectService) {
+class EngineerService(@Autowired val engineerRepository: EngineerRepository) {
 
     fun getAllEngineers() = engineerRepository.findAll().map { it.toDTO() }
+
+    fun getAllEngineersByProject(projectID: String) = engineerRepository.findAllByProject(projectID).get().map { it.toDTO() }
 
     fun addEngineer(engineer: EngineerDTO) = engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO()
 
     fun addEngineers(engineers: MutableList<EngineerDTO>) = engineers.forEach { engineer -> engineerRepository.save(EngineerEntity(engineer.name, engineer.senority, engineer.teams, engineer.city, engineer.country, engineer.email, engineer.project, engineer.tags, engineer.role, engineer.identities, engineer.reportsTo, engineer.status, engineer.username, engineer.ignorable)).toDTO() }
-
-    fun getEngineersByPage(pageIndex: Int, pageSize: Int, projectID: String) = engineerRepository.findAllByProject(projectID).get().subList(pageIndex * pageSize, pageSize * (pageIndex + 1) - 1)
 
     fun assignEngineerToTeam(engineerId: String, teamId: String) {
         val engineer = engineerRepository.findByUuid(engineerId).get()
