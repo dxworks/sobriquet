@@ -10,9 +10,6 @@ class ProjectController(@Autowired val projectService: ProjectService) {
     @GetMapping("/projects")
     fun getAll() = projectService.getAll()
 
-    @GetMapping("/project/{name}")
-    fun getByName(@PathVariable name: String) = projectService.getById(name)
-
     @PostMapping("/addProject")
     fun addProject(@RequestBody project: ProjectDTO) = projectService.add(project)
 

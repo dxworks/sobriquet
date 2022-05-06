@@ -14,8 +14,6 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     fun getAll() = projectRepository.findAll().map { it.toDTO() }
 
-    fun getById(id: String) = projectRepository.findByUuid(id).get().toDTO()
-
     fun add(project: ProjectDTO) {
         val engineersEntity = project.engineers.map { EngineerEntity(it.name!!, it.senority, it.teams, it.city, it.country, it.email!!, it.project, it.tags, it.role, it.identities, it.reportsTo, it.status, it.username!!, it.ignorable) }.toMutableList()
         projectRepository.save(ProjectEntity(project.name, project.identities, engineersEntity))
