@@ -1,7 +1,7 @@
 package com.example.sortinghat.repositories
 
 import com.example.sortinghat.persistance.EngineerEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 import java.util.*
 
 interface EngineerRepository : CrudRepository<EngineerEntity, Long> {
