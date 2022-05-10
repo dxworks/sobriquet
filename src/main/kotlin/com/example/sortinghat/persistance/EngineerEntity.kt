@@ -51,7 +51,7 @@ class EngineerEntity(
             mutableListOf(), "", mutableListOf(), "", "", "", false)
 
     fun toDTO() = EngineerDTO(
-            id = uuid,
+            id = id,
             name = name,
             senority = senority,
             teams = teams,

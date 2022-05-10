@@ -22,9 +22,6 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
     }
 
     @Bean
-    fun passwordEncoder() = BCryptPasswordEncoder()
-
-    @Bean
     fun corsConfigurer(): WebMvcConfigurer {
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {

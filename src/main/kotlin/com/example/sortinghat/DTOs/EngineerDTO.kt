@@ -1,7 +1,7 @@
 package com.example.sortinghat.DTOs
 
 data class EngineerDTO(
-        var id: String?,
+        var id: Long?,
         var name: String?,
         var senority: String = "",
         var teams: MutableList<String> = mutableListOf(),
@@ -17,3 +17,4 @@ data class EngineerDTO(
         var username: String? = "",
         var ignorable: Boolean = false
 )
+

@@ -1,9 +1,13 @@
 package com.example.sortinghat.services
 
-import com.example.sortinghat.DTOs.IdentityDTO
+import com.example.sortinghat.DTOs.EngineerDTO
+import com.example.sortinghat.DTOs.ProjectDTO
+import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.persistance.ProjectEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import com.example.sortinghat.repositories.ProjectRepository
+import com.github.dozermapper.core.DozerBeanMapperBuilder
+import org.apache.catalina.mapper.Mapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
@@ -13,13 +17,16 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     fun getAll() = projectRepository.findAll().map { it.toDTO() }
 
-    fun getByName(name: String) = projectRepository.findByName(name).get().toDTO()
+    fun add(project: ProjectDTO) {
+        val engineersEntity = project.engineers.map { EngineerEntity(it.name!!, it.senority, it.teams, it.city, it.country, it.email!!, it.project, it.tags, it.role, it.identities, it.reportsTo, it.status, it.username!!, it.ignorable) }.toMutableList()
+        projectRepository.save(ProjectEntity(project.name, project.identities, engineersEntity))
+    }
 
-    fun add(name: String, identities: MutableList<IdentityDTO>) = projectRepository.save(ProjectEntity(name, identities))
-
-    fun edit(id: String, identities: MutableList<IdentityDTO>) {
+    fun edit(id: String, newProject: ProjectDTO) {
         val project = projectRepository.findByUuid(id).get()
-        project.identities = identities
+        val mapper = DozerBeanMapperBuilder.create()
+        project.identities = newProject.identities
+        project.engineers = newProject.engineers.map { mapper.build().map(it, EngineerEntity::class.java) }.toMutableList()
         projectRepository.save(project).toDTO()
     }
 
@@ -30,4 +37,5 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
         }
         projectRepository.findByUuid(id).let { projectRepository.delete(it.get()) }
     }
+
 }

@@ -2,7 +2,7 @@ package com.example.sortinghat.repositories
 
 
 import com.example.sortinghat.persistance.RoleEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface RoleRepository: JpaRepository<RoleEntity, Long>
+interface RoleRepository: CrudRepository<RoleEntity, Long>
 

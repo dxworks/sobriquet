@@ -2,7 +2,7 @@ package com.example.sortinghat.repositories
 
 
 import com.example.sortinghat.persistance.TagEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.repository.CrudRepository
 
-interface TagRepository: JpaRepository<TagEntity, Long>
+interface TagRepository: CrudRepository<TagEntity, Long>
 
