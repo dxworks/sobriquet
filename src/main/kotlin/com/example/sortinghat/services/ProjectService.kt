@@ -1,13 +1,11 @@
 package com.example.sortinghat.services
 
-import com.example.sortinghat.DTOs.EngineerDTO
 import com.example.sortinghat.DTOs.ProjectDTO
 import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.persistance.ProjectEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import com.example.sortinghat.repositories.ProjectRepository
 import com.github.dozermapper.core.DozerBeanMapperBuilder
-import org.apache.catalina.mapper.Mapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
