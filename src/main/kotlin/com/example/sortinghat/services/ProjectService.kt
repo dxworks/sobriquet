@@ -5,7 +5,6 @@ import com.example.sortinghat.persistance.EngineerEntity
 import com.example.sortinghat.persistance.ProjectEntity
 import com.example.sortinghat.repositories.EngineerRepository
 import com.example.sortinghat.repositories.ProjectRepository
-import com.github.dozermapper.core.DozerBeanMapperBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
@@ -22,9 +21,8 @@ class ProjectService(@Autowired val projectRepository: ProjectRepository, @Autow
 
     fun edit(id: String, newProject: ProjectDTO) {
         val project = projectRepository.findByUuid(id).get()
-        val mapper = DozerBeanMapperBuilder.create()
         project.identities = newProject.identities
-        project.engineers = newProject.engineers.map { mapper.build().map(it, EngineerEntity::class.java) }.toMutableList()
+        project.engineers = newProject.engineers.map { it.toEntity() }.toMutableList()
         projectRepository.save(project).toDTO()
     }
 

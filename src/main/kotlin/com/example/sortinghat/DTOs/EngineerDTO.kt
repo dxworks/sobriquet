@@ -1,5 +1,7 @@
 package com.example.sortinghat.DTOs
 
+import com.example.sortinghat.persistance.EngineerEntity
+
 data class EngineerDTO(
         var id: Long?,
         var name: String?,
@@ -16,5 +18,27 @@ data class EngineerDTO(
         var status: String = "",
         var username: String? = "",
         var ignorable: Boolean = false
-)
+) {
+    fun toEntity(): EngineerEntity {
+        val entity = EngineerEntity()
+        if (id !== null) {
+            entity.id = id!!
+        }
+        entity.name = name
+        entity.senority = senority
+        entity.teams = teams
+        entity.city = city
+        entity.country = country
+        entity.email = email
+        entity.project = project
+        entity.tags = tags
+        entity.identities = identities
+        entity.role = role
+        entity.reportsTo = reportsTo
+        entity.status = status
+        entity.username = username
+        entity.ignorable = ignorable
+        return entity
+    }
+}
 
