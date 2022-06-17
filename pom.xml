@@ -131,7 +131,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.example.sortinghat.SortinghatApplicationKt</mainClass>
+                            <mainClass>com.example.sobriquet.SobriquetApplicationKt</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
